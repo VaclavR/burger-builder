@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import styles from './Layout.module.css';
+import React from 'react'
+import styles from './Layout.module.css'
+import PropTypes from 'prop-types'
 
-class Layout extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                <div>Toolbar, SideDrawer, Backdrop</div>
-                <main className={styles.Content}>
-                    {this.props.children}
-                </main>
-            </React.Fragment>
-        );
-    }
+const layout = (props) => {
+    return (
+        <React.Fragment>
+            <div>Toolbar, SideDrawer, Backdrop</div>
+            <main className={styles.Content}>
+                {props.children}
+            </main>
+        </React.Fragment>
+    )
 }
 
-export default Layout;
+layout.propTypes = {
+    children: PropTypes.object
+}
+
+export default layout
