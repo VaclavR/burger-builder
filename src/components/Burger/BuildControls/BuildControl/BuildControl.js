@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './buildControl.module.css'
+import styles from './BuildControl.module.css'
 import PropTypes from 'prop-types'
 
 const buildControl = (props) => {
