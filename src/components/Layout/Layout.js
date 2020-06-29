@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import styles from './Layout.module.css';
+import React, { Component } from 'react'
+import styles from './Layout.module.css'
+import PropTypes from 'prop-types'
 
 class Layout extends Component {
-    render() {
+    render () {
         return (
             <React.Fragment>
                 <div>Toolbar, SideDrawer, Backdrop</div>
@@ -10,8 +11,12 @@ class Layout extends Component {
                     {this.props.children}
                 </main>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default Layout;
+Layout.propTypes = {
+    children: PropTypes.object
+}
+
+export default Layout

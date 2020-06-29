@@ -1,23 +1,32 @@
-import React from 'react';
-import styles from './Burger.module.css';
-import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import React, { Component } from 'react'
+import styles from './Burger.module.css'
+import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
+import PropTypes from 'prop-types'
 
-const burger = (props) => {
-    const transformedIngredients = Object.keys(props.ingredients)
-        .map(igKey => {
-            return [...Array(props.ingredients[igKey])]
-                .map((_, i) => {
-                    return <BurgerIngredient key={igKey + i} type={igKey} />
-                });
-        });
+class Burger extends Component {
+    render () {
+        let transformedIngredients = Object.keys(this.props.ingredients)
+            .flatMap(igKey => {
+                return [...Array(this.props.ingredients[igKey])]
+                    .map((_, i) => <BurgerIngredient key={igKey + i} type={igKey} />)
+            })
 
-    return (
-        <div className={styles.Burger}>
-            <BurgerIngredient type="bread-top" />
-            {transformedIngredients}
-            <BurgerIngredient type="bread-bottom" />
-        </div>
-    );
+        if (!transformedIngredients.length) {
+            transformedIngredients = <p>Please start adding ingredients!</p>
+        }
+
+        return (
+            <div className={styles.Burger}>
+                <BurgerIngredient type="bread-top" />
+                {transformedIngredients}
+                <BurgerIngredient type="bread-bottom" />
+            </div>
+        )
+    }
 }
 
-export default burger;
+Burger.propTypes = {
+    ingredients: PropTypes.object
+}
+
+export default Burger
