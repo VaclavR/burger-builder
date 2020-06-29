@@ -4,7 +4,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 import PropTypes from 'prop-types'
 
 class Burger extends Component {
-    render () {
+    render() {
         let transformedIngredients = Object.keys(this.props.ingredients)
             .flatMap(igKey => {
                 return [...Array(this.props.ingredients[igKey])]

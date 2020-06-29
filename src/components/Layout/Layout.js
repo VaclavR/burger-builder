@@ -3,7 +3,7 @@ import styles from './Layout.module.css'
 import PropTypes from 'prop-types'
 
 class Layout extends Component {
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <div>Toolbar, SideDrawer, Backdrop</div>

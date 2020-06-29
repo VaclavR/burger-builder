@@ -11,7 +11,7 @@ class BurgerBuilder extends Component {
         }
     }
 
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <Burger ingredients={this.state.ingredients} />
