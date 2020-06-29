@@ -1,27 +1,43 @@
 module.exports = {
-    env: {
-        browser: true,
-        es2020: true
+    'env': {
+        'browser': true,
+        'es2020': true
     },
-    extends: [
-        'plugin:react/recommended',
-        'standard'
+    'extends': [
+        'eslint:recommended',
+        'plugin:react/recommended'
     ],
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true
+    'parserOptions': {
+        'ecmaFeatures': {
+            'jsx': true
         },
-        ecmaVersion: 11,
-        sourceType: 'module'
+        'ecmaVersion': 11,
+        'sourceType': 'module'
     },
-    parser: 'babel-eslint',
-    plugins: [
+    'parser': 'babel-eslint',
+    'plugins': [
         'react'
     ],
-    rules: {
-        indent: ['error', 4, { SwitchCase: 1 }],
+    'rules': {
+        'indent': [
+            'error',
+            4,
+            { 'SwitchCase': 1 }
+        ],
+        'linebreak-style': [
+            'error',
+            'windows'
+        ],
+        'quotes': [
+            'error',
+            'single'
+        ],
+        'semi': [
+            'error',
+            'never'
+        ],
         'no-var': 'error',
-        'space-before-function-paren': ['error', 'never'],
-        'no-console': 'warn'
+        'no-console': 'warn',
+        'space-before-function-paren': ['error', 'never']
     }
 }
