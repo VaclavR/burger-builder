@@ -10,7 +10,7 @@ const controls = [
     { label: 'Meat', type: 'meat' }
 ]
 
-const buildControls = (props) => {
+const buildControls = props => {
     return (
         <div className={styles.BuildControls}>
             <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
@@ -22,7 +22,10 @@ const buildControls = (props) => {
                     removed={() => props.ingredientRemoved(ctrl.type)}
                     disabled={!props.ingredients[ctrl.type]}/>
             ))}
-            <button className={styles.OrderButton} disabled={!props.purchaseable}>Order Now</button>
+            <button
+                className={styles.OrderButton}
+                disabled={!props.purchaseable}
+                onClick={props.ordered}>Order Now</button>
         </div>
     )
 }
@@ -32,7 +35,8 @@ buildControls.propTypes = {
     ingredientRemoved: PropTypes.func,
     ingredients: PropTypes.object,
     price: PropTypes.number,
-    purchaseable: PropTypes.bool
+    purchaseable: PropTypes.bool,
+    ordered: PropTypes.func
 }
 
 export default buildControls

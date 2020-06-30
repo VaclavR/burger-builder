@@ -3,7 +3,7 @@ import styles from './Burger.module.css'
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 import PropTypes from 'prop-types'
 
-const burger = (props) => {
+const burger = props => {
     let transformedIngredients = Object.keys(props.ingredients)
         .flatMap(igKey => {
             return [...Array(props.ingredients[igKey])]
