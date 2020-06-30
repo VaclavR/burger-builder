@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from './BuildControl.module.css'
 import PropTypes from 'prop-types'
+import styles from './BuildControl.module.css'
 
 const buildControl = props => {
     return (
