@@ -31,7 +31,6 @@ const burgerIngredient = props => {
             break
         default:
             ingredient = null
-            break
     }
 
     return ingredient
