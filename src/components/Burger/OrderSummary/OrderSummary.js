@@ -19,6 +19,7 @@ const orderSummary = props => {
             <ul>
                 {ingredientSummary}
             </ul>
+            <p><strong>Total Price: {props.totalPrice.toFixed(2)}</strong></p>
             <p>Continue to Checkout?</p>
             <Button btnType='Danger' clicked={props.purchaseCancelled}>Cancel</Button>
             <Button btnType='Success' clicked={props.purchaseContinued}>Continue</Button>
@@ -29,7 +30,8 @@ const orderSummary = props => {
 orderSummary.propTypes = {
     ingredients: PropTypes.object,
     purchaseCancelled: PropTypes.func,
-    purchaseContinued: PropTypes.func
+    purchaseContinued: PropTypes.func,
+    totalPrice: PropTypes.number
 }
 
 export default orderSummary
