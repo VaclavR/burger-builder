@@ -38,6 +38,7 @@ module.exports = {
         ],
         'no-var': 'error',
         'no-console': 'warn',
-        'space-before-function-paren': ['error', 'never']
+        'space-before-function-paren': ['error', 'never'],
+        'react/jsx-tag-spacing': ['error', { 'beforeSelfClosing': 'always' }]
     }
 }
