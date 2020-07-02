@@ -9,7 +9,7 @@ const sideDrawer = props => {
 
     return (
         <React.Fragment>
-            <Backdrop show={props.open} clicked={props.closed} />
+            <Backdrop show={props.open} clicked={props.closedHandler} />
             <div className={[styles.SideDrawer, (props.open ? styles.Open : styles.Close)].join(' ')}>
                 <div className={styles.Logo}><Logo /></div>
                 <nav>
@@ -22,7 +22,7 @@ const sideDrawer = props => {
 
 sideDrawer.propTypes = {
     open: PropTypes.bool,
-    closed: PropTypes.func
+    closedHandler: PropTypes.func
 }
 
 export default sideDrawer
