@@ -14,7 +14,7 @@ class Layout extends Component {
     }
 
     sideDrawerToggleHandler = () => {
-        // overkill this.setState({showSideDrawer: false}) should be enough
+        // overkill this.setState({showSideDrawer: true}) should be enough
         this.setState(prevState => {
             return {showSideDrawer: !prevState.showSideDrawer}
         })
