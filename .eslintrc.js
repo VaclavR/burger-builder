@@ -22,7 +22,9 @@ module.exports = {
         'indent': [
             'error',
             4,
-            { 'SwitchCase': 1 }
+            {
+                'SwitchCase': 1
+            }
         ],
         'linebreak-style': [
             'error',
@@ -37,8 +39,50 @@ module.exports = {
             'never'
         ],
         'no-var': 'error',
-        'no-console': 'warn',
-        'space-before-function-paren': ['error', 'never'],
-        'react/jsx-tag-spacing': ['error', { 'beforeSelfClosing': 'always' }]
+        'no-console': [
+            'warn', { 'allow': ['warn']}
+        ],
+        'comma-spacing': [
+            'error', {
+                'before': false,
+                'after': true
+            }
+        ],
+        'array-bracket-spacing': [
+            'error',
+            'never',
+            {
+                'objectsInArrays': false,
+                'arraysInArrays': false,
+                'singleValue': false
+            }
+        ],
+        'object-curly-spacing': [
+            'error',
+            'never',
+            {
+                'objectsInObjects': false,
+                'arraysInObjects': false
+            }
+        ],
+        'space-before-function-paren': [
+            'error',
+            'never'
+        ],
+        'react/jsx-curly-spacing': [
+            'error',
+            {'when': 'never'}
+        ],
+        'react/jsx-tag-spacing': [
+            'error',
+            {'beforeSelfClosing': 'always'}
+        ],
+        'react/boolean-prop-naming': [
+            'error', {}
+        ],
+        'jsx-quotes': [
+            'error',
+            'prefer-single'
+        ]
     }
 }

@@ -4,7 +4,7 @@ import styles from './Logo.module.css'
 
 const logo = () => (
     <div className={styles.Logo}>
-        <img src={burgerLogo} alt="MyBurger" />
+        <img src={burgerLogo} alt='MyBurger' />
     </div>
 )
 
