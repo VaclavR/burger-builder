@@ -9,7 +9,7 @@ const buildControl = props => {
             <button
                 className={styles.Less}
                 onClick={props.removed}
-                disabled={props.disabled}>Less</button>
+                disabled={props.isDisabled}>Less</button>
             <button className={styles.More} onClick={props.added}>More</button>
         </div>
     )
@@ -19,7 +19,7 @@ buildControl.propTypes = {
     label: PropTypes.string,
     added: PropTypes.func,
     removed: PropTypes.func,
-    disabled: PropTypes.bool
+    isDisabled: PropTypes.bool
 }
 
 export default buildControl

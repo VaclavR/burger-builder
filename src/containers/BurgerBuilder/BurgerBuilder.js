@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
@@ -25,7 +25,7 @@ class BurgerBuilder extends Component {
     }
 
     updatePurchaseState() {
-        this.setState({ purchaseable: Object.values(this.state.ingredients).some(value => value) })
+        this.setState({purchaseable: Object.values(this.state.ingredients).some(value => value)})
     }
 
     addIngredientHandler = type => {
@@ -38,7 +38,7 @@ class BurgerBuilder extends Component {
         const priceAddition = INGREDIENT_PRICES[type]
         const oldPrice = this.state.totalPrice
         const newPrice = oldPrice + priceAddition
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients }, this.updatePurchaseState)
+        this.setState({totalPrice: newPrice, ingredients: updatedIngredients}, this.updatePurchaseState)
     }
 
     removeIngredientHandler = type => {
@@ -52,7 +52,7 @@ class BurgerBuilder extends Component {
         const priceDeduction = INGREDIENT_PRICES[type]
         const oldPrice = this.state.totalPrice
         const newPrice = oldPrice - priceDeduction
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients }, this.updatePurchaseState)
+        this.setState({totalPrice: newPrice, ingredients: updatedIngredients}, this.updatePurchaseState)
     }
 
     purchaseHandler = () => {
@@ -70,7 +70,7 @@ class BurgerBuilder extends Component {
     render() {
         return (
             <React.Fragment>
-                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                <Modal isVisible={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary
                         totalPrice={this.state.totalPrice}
                         ingredients={this.state.ingredients}
@@ -83,7 +83,7 @@ class BurgerBuilder extends Component {
                     ingredientRemoved={this.removeIngredientHandler}
                     ingredients={this.state.ingredients}
                     price={this.state.totalPrice}
-                    purchaseable={this.state.purchaseable}
+                    isPurchaseable={this.state.purchaseable}
                     ordered={this.purchaseHandler} />
             </React.Fragment>
         )

@@ -4,10 +4,10 @@ import styles from './BuildControls.module.css'
 import BuildControl from './BuildControl/BuildControl'
 
 const controls = [
-    { label: 'Salad', type: 'salad' },
-    { label: 'Bacon', type: 'bacon' },
-    { label: 'Cheese', type: 'cheese' },
-    { label: 'Meat', type: 'meat' }
+    {label: 'Salad', type: 'salad'},
+    {label: 'Bacon', type: 'bacon'},
+    {label: 'Cheese', type: 'cheese'},
+    {label: 'Meat', type: 'meat'}
 ]
 
 const buildControls = props => (
@@ -19,11 +19,11 @@ const buildControls = props => (
                 label={ctrl.label}
                 added={() => props.ingredientAdded(ctrl.type)}
                 removed={() => props.ingredientRemoved(ctrl.type)}
-                disabled={!props.ingredients[ctrl.type]} />
+                isDisabled={!props.ingredients[ctrl.type]} />
         ))}
         <button
             className={styles.OrderButton}
-            disabled={!props.purchaseable}
+            disabled={!props.isPurchaseable}
             onClick={props.ordered}>Order Now</button>
     </div>
 )
@@ -34,7 +34,7 @@ buildControls.propTypes = {
     ingredientRemoved: PropTypes.func,
     ingredients: PropTypes.object,
     price: PropTypes.number,
-    purchaseable: PropTypes.bool,
+    isPurchaseable: PropTypes.bool,
     ordered: PropTypes.func
 }
 

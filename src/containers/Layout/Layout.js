@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styles from './Layout.module.css'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
@@ -24,10 +24,10 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <Toolbar
-                    open={this.state.showSideDrawer}
+                    isOpen={this.state.showSideDrawer}
                     drawerToggleClicked={this.sideDrawerToggleHandler} />
                 <SideDrawer
-                    open={this.state.showSideDrawer}
+                    isOpen={this.state.showSideDrawer}
                     closedHandler={this.sideDrawerClosedHandler} />
                 <main className={styles.Content}>
                     {this.props.children}
