@@ -4,6 +4,7 @@ import Modal from '../../components/UI/Modal/Modal'
 const withErrorHandler = (WrappedComponent, axios) => {
     return class ErrorModal extends Component {
         state = {
+            initialized: false,
             error: null
         }
 
@@ -12,17 +13,18 @@ const withErrorHandler = (WrappedComponent, axios) => {
         }
 
         componentDidMount() {
-            axios.interceptors.request.use(req => {
+            this.requestInterceptors = axios.interceptors.request.use(req => {
                 this.setState({error: null})
                 return req
             })
-            axios.interceptors.response.use(res => res, error => {
-                console.log(error)
+            this.responseInterceptors = axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error})
             })
+            this.setState({initialized: true})
         }
 
         render() {
+            if (!this.state.initialized) return null
             return (
                 <React.Fragment>
                     <Modal
