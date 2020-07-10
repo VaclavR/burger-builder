@@ -21,7 +21,6 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         purchaseable: false,
         purchasing: false,
-        loading: false,
         error: false
     }
 
@@ -73,34 +72,11 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        // this.setState({loading: true})
-        // const orderData = {
-        //     ingredient: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: 'Max Schwarzmuller',
-        //         addres: {
-        //             street: 'Teststreet 1',
-        //             city: 'Berlin',
-        //             zipCode: '41351',
-        //             country: 'Germany'
-        //         },
-        //         email: 'test@test.com'
-        //     },
-        //     deliveryMethod: 'fastest'
-        // }
-        // axios.post('orders.json', orderData)
-        //     .then(() => {
-        //         this.setState({loading: false, purchasing: false})
-        //     })
-        //     .catch(error => {
-        //         this.setState({loading: false, purchasing: false})
-        //         console.warn(error)
-        //     })
-        const queryParams = [];
+        const queryParams = []
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
+        queryParams.push('price=' + this.state.totalPrice)
         this.props.history.push({
             pathname: '/checkout',
             search: queryParams.join('&')
@@ -129,9 +105,6 @@ class BurgerBuilder extends Component {
                     ingredients={this.state.ingredients}
                     purchaseCancelled={this.purchaseCancelHandler}
                     purchaseContinued={this.purchaseContinueHandler} />)
-            if (this.state.loading) {
-                orderSummary = <Spinner />
-            }
         }
         return (
             <React.Fragment>
