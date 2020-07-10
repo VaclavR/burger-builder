@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import {Route} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import CheckouSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
+import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
+import ContactData from '../../components/Order/CheckoutSummary/ContactData/ContactData'
 
 class Checkout extends Component {
     state = {
@@ -27,10 +29,11 @@ class Checkout extends Component {
     render() {
         return (
             <div>
-                <CheckouSummary
+                <CheckoutSummary
                     ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} />
+                <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
             </div>
         )
     }
@@ -38,7 +41,8 @@ class Checkout extends Component {
 
 Checkout.propTypes = {
     history: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default Checkout
