@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import Burger from '../../components/Burger/Burger'
@@ -72,30 +73,38 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({loading: true})
-        const orderData = {
-            ingredient: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Max Schwarzmuller',
-                addres: {
-                    street: 'Teststreet 1',
-                    city: 'Berlin',
-                    zipCode: '41351',
-                    country: 'Germany'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
+        // this.setState({loading: true})
+        // const orderData = {
+        //     ingredient: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Max Schwarzmuller',
+        //         addres: {
+        //             street: 'Teststreet 1',
+        //             city: 'Berlin',
+        //             zipCode: '41351',
+        //             country: 'Germany'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
+        // axios.post('orders.json', orderData)
+        //     .then(() => {
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        //     .catch(error => {
+        //         this.setState({loading: false, purchasing: false})
+        //         console.warn(error)
+        //     })
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
-        axios.post('orders.json', orderData)
-            .then(() => {
-                this.setState({loading: false, purchasing: false})
-            })
-            .catch(error => {
-                this.setState({loading: false, purchasing: false})
-                console.warn(error)
-            })
+        this.props.history.push({
+            pathname: '/checkout',
+            search: queryParams.join('&')
+        })
     }
 
     render() {
@@ -135,6 +144,10 @@ class BurgerBuilder extends Component {
             </React.Fragment>
         )
     }
+}
+
+BurgerBuilder.propTypes = {
+    history: PropTypes.object
 }
 
 export default withErrorHandler(BurgerBuilder, axios)

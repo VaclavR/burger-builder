@@ -12,17 +12,19 @@ const checkoutSummary = props => {
                 <Burger ingredients={props.ingredients} />
             </div>
             <Button
-                clicked
+                clicked={props.checkoutCancelled}
                 btnType='Danger'>CANCEL</Button>
             <Button
-                clicked
+                clicked={props.checkoutContinued}
                 btnType='Success'>CONFIRM</Button>
         </div>
     )
 }
 
 checkoutSummary.propTypes = {
-    ingredients: PropTypes.array
+    ingredients: PropTypes.object,
+    checkoutCancelled: PropTypes.func,
+    checkoutContinued: PropTypes.func
 }
 
 export default checkoutSummary
