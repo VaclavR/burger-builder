@@ -4,6 +4,7 @@ import styles from './Button.module.css'
 
 const button = props => (
     <button
+        disabled={props.isDisabled}
         className={[styles.Button, styles[props.btnType]].join(' ')}
         onClick={props.clicked}>{props.children}</button>
 )
@@ -11,7 +12,8 @@ const button = props => (
 button.propTypes = {
     children: PropTypes.string,
     clicked: PropTypes.func,
-    btnType: PropTypes.string
+    btnType: PropTypes.string,
+    isDisabled: PropTypes.bool
 }
 
 export default button
