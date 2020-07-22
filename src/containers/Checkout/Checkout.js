@@ -1,15 +1,11 @@
 import React, {Component} from 'react'
 import {Route} from 'react-router-dom'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
 import ContactData from '../../components/Order/CheckoutSummary/ContactData/ContactData'
 
 class Checkout extends Component {
-    state = {
-        ingredients: {},
-        totalPrice: 0
-    }
-
     checkoutCancelledHandler = () => {
         this.props.history.goBack()
     }
@@ -18,43 +14,33 @@ class Checkout extends Component {
         this.props.history.replace('/checkout/contact-data')
     }
 
-    componentDidMount() {
-        const query = new URLSearchParams(this.props.location.search)
-        const ingredients = {}
-        let price = 0
-        for (let param of query.entries()) {
-            if (param[0] === 'price') {
-                price = param[1]
-            } else {
-                ingredients[param[0]] = +param[1]
-            }
-        }
-        this.setState({ingredients: ingredients, totalPrice: +price})
-    }
-
     render() {
         return (
             <div>
                 <CheckoutSummary
-                    ingredients={this.state.ingredients}
+                    ingredients={this.props.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} />
                 <Route
                     path={this.props.match.path + '/contact-data'}
-                    render={props => (
-                        <ContactData
-                            ingredients={this.state.ingredients}
-                            price={this.state.totalPrice}
-                            {...props} />)} />
+                    component={ContactData} />
             </div>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        ingredients: state.ingredients,
     }
 }
 
 Checkout.propTypes = {
     history: PropTypes.object,
     location: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    ingredients: PropTypes.object,
+    totalPrice: PropTypes.number
 }
 
-export default Checkout
+export default connect(mapStateToProps)(Checkout)
