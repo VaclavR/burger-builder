@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
@@ -15,23 +15,30 @@ class Checkout extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <CheckoutSummary
-                    ingredients={this.props.ingredients}
-                    checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler} />
-                <Route
-                    path={this.props.match.path + '/contact-data'}
-                    component={ContactData} />
-            </div>
-        )
+        let summary = <Redirect to='/' />
+        if (this.props.ingredients) {
+            const purchasedRedirect = this.props.isPurchased ? <Redirect to='/' /> : null
+            summary = (
+                <div>
+                    {purchasedRedirect}
+                    <CheckoutSummary
+                        ingredients={this.props.ingredients}
+                        checkoutCancelled={this.checkoutCancelledHandler}
+                        checkoutContinued={this.checkoutContinuedHandler} />
+                    <Route
+                        path={this.props.match.path + '/contact-data'}
+                        component={ContactData} />
+                </div>
+            )
+        }
+        return summary
     }
 }
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
+        ingredients: state.burgerBuilder.ingredients,
+        isPurchased: state.order.isPurchased
     }
 }
 
@@ -40,7 +47,9 @@ Checkout.propTypes = {
     location: PropTypes.object,
     match: PropTypes.object,
     ingredients: PropTypes.object,
-    totalPrice: PropTypes.number
+    totalPrice: PropTypes.number,
+    onPurchaseInit: PropTypes.func,
+    isPurchased: PropTypes.bool
 }
 
 export default connect(mapStateToProps)(Checkout)
