@@ -7,10 +7,11 @@ import thunk from 'redux-thunk'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import auth from './store/reducers/auth'
 import burgerBuilder from './store/reducers/burgerBuilder'
 import order from './store/reducers/order'
 
-const rootReducer = combineReducers({burgerBuilder, order})
+const rootReducer = combineReducers({auth, burgerBuilder, order})
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(

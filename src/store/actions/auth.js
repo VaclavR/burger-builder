@@ -2,7 +2,7 @@ import * as actionTypes from './actionsTypes'
 import axios from 'axios'
 
 const authStart = () => ({type: actionTypes.AUTH_START})
-const authSuccess = authData => ({type: actionTypes.AUTH_SUCCESS, authData})
+const authSuccess = (idToken, localId) => ({type: actionTypes.AUTH_SUCCESS, idToken, localId})
 const authFail = error => ({type: actionTypes.AUTH_FAIL, error})
 
 export const auth = (email, password, method) => dispatch => {
@@ -13,7 +13,7 @@ export const auth = (email, password, method) => dispatch => {
     axios.post(url, authData)
         .then(response => {
             console.log('je to v cajku', response)
-            dispatch(authSuccess(response))
+            dispatch(authSuccess(response.data.idToken, response.data.localId))
         }).catch(error => {
             console.dir(error)
             dispatch(authFail(error))
