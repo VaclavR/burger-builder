@@ -10,7 +10,7 @@ const button = props => (
 )
 
 button.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.any,
     clicked: PropTypes.func,
     btnType: PropTypes.string,
     isDisabled: PropTypes.bool
