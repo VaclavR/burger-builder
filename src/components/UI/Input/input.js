@@ -16,6 +16,8 @@ const input = props => {
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
+                name={props.name}
+                required={props.isRequired}
                 onChange={props.changed} />
             break
         case 'textarea':
@@ -66,10 +68,12 @@ input.propTypes = {
     elementConfig: PropTypes.object,
     label: PropTypes.string,
     value: PropTypes.string,
+    name: PropTypes.string,
     elementType: PropTypes.string,
     changed: PropTypes.func,
     isTouched: PropTypes.bool,
-    isInvalid: PropTypes.bool
+    isInvalid: PropTypes.bool,
+    isRequired: PropTypes.bool
 }
 
 export default input

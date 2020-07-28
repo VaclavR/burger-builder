@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './Auth.module.css'
 import * as actions from '../../store/actions'
-import Input from '../../components/UI/Input/input'
+import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 
 class Auth extends Component {
@@ -36,8 +36,9 @@ class Auth extends Component {
                 },
                 valid: false,
                 touched: false
-            },
-        }
+            }
+        },
+        formIsValid: true,
     }
 
     checkValidity = (value, rules) => {

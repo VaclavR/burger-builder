@@ -6,7 +6,7 @@ import styles from './ContactData.module.css'
 import axios from '../../../../axios-orders'
 import Button from '../../../UI/Button/Button'
 import Spinner from '../../../UI/Spinner/Spinner'
-import Input from '../../../UI/Input/input'
+import Input from '../../../UI/Input/Input'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 
 class ContactData extends Component {
@@ -82,9 +82,10 @@ class ContactData extends Component {
             email: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'text',
+                    type: 'email',
                     placeholder: 'Your E-Mail'
                 },
+                name: 'email',
                 value: '',
                 validation: {
                     required: true
@@ -172,6 +173,8 @@ class ContactData extends Component {
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}
+                        name={formElement.config.name}
+                        isRequired={true}
                         isInvalid={!formElement.config.valid}
                         isTouched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
