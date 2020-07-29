@@ -5,7 +5,7 @@ const initialState = {
     idToken: null,
     localId: null,
     error: null,
-    loading: false
+    isLoading: false
 }
 
 const authSuccess = (state, action) => {
@@ -13,7 +13,7 @@ const authSuccess = (state, action) => {
         idToken: action.idToken,
         localId: action.localId,
         error: null,
-        loading: false
+        isLoading: false
     })
 }
 
@@ -22,7 +22,7 @@ const authFail = (state, action) => {
         idToken: null,
         localId: null,
         error: action.error,
-        loading: false
+        isLoading: false
     })
 }
 
@@ -31,6 +31,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_START: return updateObject(state, {error: null, isLoading: true})
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
         case actionTypes.AUTH_FAIL: return authFail(state, action)
+        case actionTypes.AUTH_LOGOUT: return updateObject(state, {idToken: null, localId: null})
         default: return state
     }
 }
