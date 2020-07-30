@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './Layout.module.css'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
@@ -25,9 +26,11 @@ class Layout extends Component {
             <React.Fragment>
                 <Toolbar
                     isOpen={this.state.showSideDrawer}
+                    isAuthenticated={this.props.isAuthenticated}
                     drawerToggleClicked={this.sideDrawerToggleHandler} />
                 <SideDrawer
                     isOpen={this.state.showSideDrawer}
+                    isAuthenticated={this.props.isAuthenticated}
                     closedHandler={this.sideDrawerClosedHandler} />
                 <main className={styles.Content}>
                     {this.props.children}
@@ -37,9 +40,16 @@ class Layout extends Component {
     }
 }
 
-
-Layout.propTypes = {
-    children: PropTypes.object
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.idToken !== null
+    }
 }
 
-export default Layout
+
+Layout.propTypes = {
+    children: PropTypes.object,
+    isAuthenticated: PropTypes.bool
+}
+
+export default connect(mapStateToProps)(Layout)

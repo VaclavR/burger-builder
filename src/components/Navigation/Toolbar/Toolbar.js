@@ -11,13 +11,14 @@ const toolbar = props => (
         <DrawerToggle clicked={props.drawerToggleClicked} />
         <div className={styles.Logo}><Logo /></div>
         <nav className={styles.DesktopOnly}>
-            <NavigationItems />
+            <NavigationItems isAuthenticated={props.isAuthenticated} />
         </nav>
     </header>
 )
 
 toolbar.propTypes = {
-    drawerToggleClicked: PropTypes.func
+    drawerToggleClicked: PropTypes.func,
+    isAuthenticated: PropTypes.bool
 }
 
 export default toolbar

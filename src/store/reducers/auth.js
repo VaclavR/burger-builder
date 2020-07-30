@@ -31,8 +31,12 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_START: return updateObject(state, {error: null, isLoading: true})
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
         case actionTypes.AUTH_FAIL: return authFail(state, action)
-        case actionTypes.AUTH_LOGOUT: return updateObject(state, {idToken: null, localId: null})
-        default: return state
+        case actionTypes.AUTH_LOGOUT:
+            console.log(state, action)
+            return updateObject(state, {idToken: null, localId: null})
+        default:
+            console.log(state, action)
+            return state
     }
 }
 

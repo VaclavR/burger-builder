@@ -4,9 +4,10 @@ import axios from 'axios'
 const authStart = () => ({type: actionTypes.AUTH_START})
 const authSuccess = (idToken, localId) => ({type: actionTypes.AUTH_SUCCESS, idToken, localId})
 const authFail = error => ({type: actionTypes.AUTH_FAIL, error})
-const logout = () => ({type: actionTypes.AUTH_LOGOUT})
 
-export const checkAuthTimeout = expiresIn => dispatch => {
+export const logout = () => ({type: actionTypes.AUTH_LOGOUT})
+
+const checkAuthTimeout = expiresIn => dispatch => {
     setTimeout(() => {dispatch(logout())}, expiresIn * 1000)
 }
 

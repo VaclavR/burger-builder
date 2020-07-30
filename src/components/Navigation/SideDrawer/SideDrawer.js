@@ -13,7 +13,7 @@ const sideDrawer = props => {
             <div className={[styles.SideDrawer, (props.isOpen ? styles.Open : styles.Close)].join(' ')}>
                 <div className={styles.Logo}><Logo /></div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems isAuthenticated={props.isAuthenticated} />
                 </nav>
             </div>
         </React.Fragment>
@@ -22,6 +22,7 @@ const sideDrawer = props => {
 
 sideDrawer.propTypes = {
     isOpen: PropTypes.bool,
+    isAuthenticated: PropTypes.bool,
     closedHandler: PropTypes.func
 }
 
