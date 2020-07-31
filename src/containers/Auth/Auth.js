@@ -91,6 +91,12 @@ class Auth extends Component {
         })
     }
 
+    componentDidMount() {
+        if (!this.props.isBuilding && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath('/')
+        }
+    }
+
     render() {
         const formElementsArray = []
         for (const key in this.state.controls) {
@@ -125,7 +131,7 @@ class Auth extends Component {
 
         let authRedirect = null
         if (this.props.isAutheticated) {
-            authRedirect = <Redirect to='/' />
+            authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
         return (
@@ -149,12 +155,15 @@ const mapStateToProps = state => {
         isLoading: state.auth.isLoading,
         isAutheticated: state.auth.idToken !== null,
         error: state.auth.error,
+        isBuilding: state.burgerBuilder.isBuilding,
+        authRedirectPath: state.auth.authRedirectPath
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, method) => dispatch(actions.auth(email, password, method))
+        onAuth: (email, password, method) => dispatch(actions.auth(email, password, method)),
+        onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path))
     }
 }
 
@@ -162,7 +171,10 @@ Auth.propTypes = {
     onAuth: PropTypes.func,
     isLoading: PropTypes.bool,
     isAutheticated: PropTypes.bool,
-    error: PropTypes.object
+    isBuilding: PropTypes.bool,
+    error: PropTypes.object,
+    authRedirectPath: PropTypes.string,
+    onSetAuthRedirectPath: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

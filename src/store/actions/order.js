@@ -20,9 +20,10 @@ export const purchaseInit = () => ({type: actionTypes.PURCHASE_INIT})
 const fetchOrdersSucces = orders => ({type: actionTypes.FETCH_ORDERS_SUCCESS, orders})
 const fetchOrdersFail = error => ({type: actionTypes.FETCH_ORDERS_FAIL, error})
 const fetchOrdersStart = () => ({type: actionTypes.FETCH_ORDERS_START})
-export const fetchOrders = idToken => dispatch => {
+export const fetchOrders = (idToken, localId) => dispatch => {
     dispatch(fetchOrdersStart())
-    axios.get(`/orders.json?auth=${idToken}`)
+    const queryParams = `?auth=${idToken}&orderBy="localId"&equalTo="${localId}"`
+    axios.get(`/orders.json${queryParams}`)
         .then(response => {
             const fetchedOrders = []
             for (const key in response.data) {

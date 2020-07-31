@@ -117,7 +117,8 @@ class ContactData extends Component {
         const orderData = {
             ingredients: this.props.ingredients,
             price: this.props.totalPrice,
-            orderData: formData
+            orderData: formData,
+            localId: this.props.localId
         }
         this.props.onOrderBurger(orderData, this.props.idToken)
     }
@@ -199,7 +200,8 @@ const mapStateToProps = state => {
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
         isLoading: state.order.isLoading,
-        idToken: state.auth.idToken
+        idToken: state.auth.idToken,
+        localId: state.auth.localId
     }
 }
 
@@ -215,7 +217,8 @@ ContactData.propTypes = {
     totalPrice: PropTypes.number,
     onOrderBurger: PropTypes.func,
     isLoading: PropTypes.bool,
-    idToken: PropTypes.string
+    idToken: PropTypes.string,
+    localId: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
