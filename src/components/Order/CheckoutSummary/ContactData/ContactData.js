@@ -6,7 +6,7 @@ import styles from './ContactData.module.css'
 import axios from '../../../../axios-orders'
 import Button from '../../../UI/Button/Button'
 import Spinner from '../../../UI/Spinner/Spinner'
-import Input from '../../../UI/Input/input'
+import Input from '../../../UI/Input/Input'
 import withErrorHandler from '../../../../hoc/withErrorHandler/withErrorHandler'
 
 class ContactData extends Component {
@@ -82,9 +82,10 @@ class ContactData extends Component {
             email: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'text',
+                    type: 'email',
                     placeholder: 'Your E-Mail'
                 },
+                name: 'email',
                 value: '',
                 validation: {
                     required: true
@@ -116,9 +117,10 @@ class ContactData extends Component {
         const orderData = {
             ingredients: this.props.ingredients,
             price: this.props.totalPrice,
-            orderData: formData
+            orderData: formData,
+            localId: this.props.localId
         }
-        this.props.onOrderBurger(orderData)
+        this.props.onOrderBurger(orderData, this.props.idToken)
     }
 
     checkValidity = (value, rules) => {
@@ -172,6 +174,8 @@ class ContactData extends Component {
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}
+                        name={formElement.config.name}
+                        isRequired={true}
                         isInvalid={!formElement.config.valid}
                         isTouched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
@@ -195,13 +199,15 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
-        isLoading: state.order.isLoading
+        isLoading: state.order.isLoading,
+        idToken: state.auth.idToken,
+        localId: state.auth.localId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderBurger: orderData => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, idToken) => dispatch(actions.purchaseBurger(orderData, idToken))
     }
 }
 
@@ -210,7 +216,9 @@ ContactData.propTypes = {
     ingredients: PropTypes.object,
     totalPrice: PropTypes.number,
     onOrderBurger: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    idToken: PropTypes.string,
+    localId: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
