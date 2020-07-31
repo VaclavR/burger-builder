@@ -24,7 +24,7 @@ const buildControls = props => (
         <button
             className={styles.OrderButton}
             disabled={!props.isPurchaseable}
-            onClick={props.ordered}>Order Now</button>
+            onClick={props.ordered}>{props.isAuthenticated ? 'Order Now' : 'Sign Up to Order'}</button>
     </div>
 )
 
@@ -32,10 +32,11 @@ const buildControls = props => (
 buildControls.propTypes = {
     ingredientAdded: PropTypes.func,
     ingredientRemoved: PropTypes.func,
+    ordered: PropTypes.func,
     ingredients: PropTypes.object,
     price: PropTypes.number,
     isPurchaseable: PropTypes.bool,
-    ordered: PropTypes.func
+    isAuthenticated: PropTypes.bool
 }
 
 export default buildControls

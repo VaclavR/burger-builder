@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styles from './Auth.module.css'
 import * as actions from '../../store/actions'
@@ -122,8 +123,14 @@ class Auth extends Component {
             )
         }
 
+        let authRedirect = null
+        if (this.props.isAutheticated) {
+            authRedirect = <Redirect to='/' />
+        }
+
         return (
             <div className={styles.Auth}>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -140,7 +147,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
-        error: state.auth.error
+        isAutheticated: state.auth.idToken !== null,
+        error: state.auth.error,
     }
 }
 
@@ -153,6 +161,7 @@ const mapDispatchToProps = dispatch => {
 Auth.propTypes = {
     onAuth: PropTypes.func,
     isLoading: PropTypes.bool,
+    isAutheticated: PropTypes.bool,
     error: PropTypes.object
 }
 
