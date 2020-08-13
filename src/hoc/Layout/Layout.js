@@ -1,43 +1,36 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './Layout.module.css'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 
-class Layout extends Component {
-    state = {
-        showSideDrawer: false
+const Layout = props => {
+    const [isSidedrawerVisible, setSidedrawer] = useState(false)
+
+    const sideDrawerClosedHandler = () => {
+        setSidedrawer(false)
     }
 
-    sideDrawerClosedHandler = () => {
-        this.setState({showSideDrawer: false})
+    const sideDrawerToggleHandler = () => {
+        setSidedrawer(!isSidedrawerVisible)
     }
 
-    sideDrawerToggleHandler = () => {
-        // overkill this.setState({showSideDrawer: true}) should be enough
-        this.setState(prevState => {
-            return {showSideDrawer: !prevState.showSideDrawer}
-        })
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <Toolbar
-                    isOpen={this.state.showSideDrawer}
-                    isAuthenticated={this.props.isAuthenticated}
-                    drawerToggleClicked={this.sideDrawerToggleHandler} />
-                <SideDrawer
-                    isOpen={this.state.showSideDrawer}
-                    isAuthenticated={this.props.isAuthenticated}
-                    closedHandler={this.sideDrawerClosedHandler} />
-                <main className={styles.Content}>
-                    {this.props.children}
-                </main>
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            <Toolbar
+                isOpen={isSidedrawerVisible}
+                isAuthenticated={props.isAuthenticated}
+                drawerToggleClicked={sideDrawerToggleHandler} />
+            <SideDrawer
+                isOpen={isSidedrawerVisible}
+                isAuthenticated={props.isAuthenticated}
+                closedHandler={sideDrawerClosedHandler} />
+            <main className={styles.Content}>
+                {props.children}
+            </main>
+        </React.Fragment>
+    )
 }
 
 const mapStateToProps = state => {
