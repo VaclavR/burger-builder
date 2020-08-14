@@ -7,10 +7,11 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import Order from '../../components/Order/Order'
 
 const Orders = props => {
+    const {onFetchOrders, idToken, localId} = props
 
     useEffect(() => {
-        props.onFetchOrders(props.idToken, props.localId)
-    }, [])
+        onFetchOrders(idToken, localId)
+    }, [onFetchOrders, idToken, localId])
 
 
     let orders = props.orders.map(order => {

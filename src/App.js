@@ -14,10 +14,11 @@ const Auth = lazy(() => import('./containers/Auth/Auth'))
 
 
 const App = props => {
+    const {onAuthCheckState} = props
 
     useEffect(() => {
-        props.onAuthCheckState()
-    }, [props])
+        onAuthCheckState()
+    }, [onAuthCheckState])
 
     let routes = (
         <Suspense fallback={<Spinner />}>

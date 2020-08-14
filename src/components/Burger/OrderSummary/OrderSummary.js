@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../UI/Button/Button'
 
-const orderSummary = props => {
+const OrderSummary = props => {
     const ingredientSummary = Object.keys(props.ingredients)
         .map(igKey => {
             return (
@@ -27,11 +27,11 @@ const orderSummary = props => {
     )
 }
 
-orderSummary.propTypes = {
+OrderSummary.propTypes = {
     ingredients: PropTypes.object,
     purchaseCancelled: PropTypes.func,
     purchaseContinued: PropTypes.func,
     totalPrice: PropTypes.number
 }
 
-export default orderSummary
+export default OrderSummary

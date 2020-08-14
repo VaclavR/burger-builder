@@ -15,9 +15,7 @@ const rootReducer = combineReducers({auth, burgerBuilder, order})
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}><App /></Provider>
-    </React.StrictMode>,
+    <Provider store={store}><App /></Provider>,
     document.getElementById('root')
 )
 

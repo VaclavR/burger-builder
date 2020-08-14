@@ -22,6 +22,7 @@ const Auth = props => {
                 required: true,
                 isEmail: true,
             },
+            autocomplete: 'username',
             valid: false,
             touched: false
         },
@@ -36,6 +37,7 @@ const Auth = props => {
                 required: true,
                 minLength: 6
             },
+            autocomplete: 'current-password',
             valid: false,
             touched: false
         }
@@ -66,11 +68,13 @@ const Auth = props => {
         setSignUp(!isSignUp)
     }
 
+    const { onSetAuthRedirectPath, isBuilding, authRedirectPath } = props
+
     useEffect(() => {
-        if (!props.isBuilding && props.authRedirectPath !== '/') {
-            props.onSetAuthRedirectPath('/')
+        if (isBuilding && authRedirectPath !== '/') {
+            onSetAuthRedirectPath('/')
         }
-    }, [])
+    }, [onSetAuthRedirectPath, isBuilding, authRedirectPath])
 
     const formElementsArray = []
     for (const key in controls) {
@@ -88,6 +92,7 @@ const Auth = props => {
             value={formElement.config.value}
             isInvalid={!formElement.config.valid}
             isTouched={formElement.config.touched}
+            autocomplete={formElement.config.autocomplete}
             changed={(event) => inputChangedHandler(event, formElement.id)} />
     ))
 
