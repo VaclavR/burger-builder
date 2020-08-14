@@ -18,7 +18,8 @@ const input = props => {
                 value={props.value}
                 name={props.name}
                 required={props.isRequired}
-                onChange={props.changed} />
+                onChange={props.changed}
+                autoComplete={props.autocomplete} />
             break
         case 'textarea':
             inputElement = <textarea
@@ -44,6 +45,7 @@ const input = props => {
             )
             break
         default:
+            console.log(props.elementType)
             inputElement = <input
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
@@ -70,6 +72,7 @@ input.propTypes = {
     value: PropTypes.string,
     name: PropTypes.string,
     elementType: PropTypes.string,
+    autocomplete: PropTypes.string,
     changed: PropTypes.func,
     isTouched: PropTypes.bool,
     isInvalid: PropTypes.bool,

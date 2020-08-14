@@ -1,28 +1,26 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
 
-class Modal extends Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.isVisible !== this.props.isVisible || nextProps.isVisible
-    }
+const Modal = props => {
+    // shouldComponentUpdate(nextProps) {
+    //     return nextProps.isVisible !== props.isVisible || nextProps.isVisible
+    // }
 
-    render() {
-        return (
-            <React.Fragment>
-                <Backdrop isVisible={this.props.isVisible} clicked={this.props.modalClosed} />
-                <div
-                    className={styles.Modal}
-                    style={{
-                        transform: this.props.isVisible ? 'translateY(0)' : 'translateY(-100vh)',
-                        opacity: this.props.isVisible ? '1' : '0'
-                    }}>
-                    {this.props.children}
-                </div>
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            <Backdrop isVisible={props.isVisible} clicked={props.modalClosed} />
+            <div
+                className={styles.Modal}
+                style={{
+                    transform: props.isVisible ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: props.isVisible ? '1' : '0'
+                }}>
+                {props.children}
+            </div>
+        </React.Fragment>
+    )
 }
 
 Modal.propTypes = {
@@ -31,4 +29,9 @@ Modal.propTypes = {
     modalClosed: PropTypes.func
 }
 
-export default Modal
+export default React.memo(
+    Modal,
+    (prevProps, nextProps) =>
+        nextProps.isVisible ===  prevProps.isVisible &&
+        nextProps.children === prevProps.children
+)

@@ -38,4 +38,3 @@ export const fetchOrders = (idToken, localId) => dispatch => {
             dispatch(fetchOrdersFail(error))
         })
 }
-

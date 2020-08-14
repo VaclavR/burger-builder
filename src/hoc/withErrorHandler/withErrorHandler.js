@@ -1,49 +1,21 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Modal from '../../components/UI/Modal/Modal'
+import useHttpErrorHandler from '../../hooks/http-error-handler'
 
 const withErrorHandler = (WrappedComponent, axios) => {
-    return class ErrorModal extends Component {
-        state = {
-            initialized: false,
-            error: null
-        }
-
-        errorConfirmedHandler = () => {
-            this.setState({error: null})
-        }
-
-        componentDidMount() {
-            this.reqInterceptor = axios.interceptors.request.use(req => {
-                this.setState({error: null})
-                return req
-            })
-            this.resInterceptor = axios.interceptors.response.use(res => {
-                if (!res.data) this.setState({error: {message: 'No Data!'}})
-                return res
-            }, error => {
-                this.setState({error: error})
-            })
-            this.setState({initialized: true})
-        }
-
-        componentWillUnmount() {
-            axios.interceptors.request.eject(this.reqInterceptor)
-            axios.interceptors.response.eject(this.resInterceptor)
-        }
-
-        render() {
-            if (!this.state.initialized) return null
-            return (
-                <React.Fragment>
-                    <Modal
-                        isVisible={this.state.error ? true : false}
-                        modalClosed={this.errorConfirmedHandler}>
-                        {this.state.error ? this.state.error.message : null}
-                    </Modal>
-                    <WrappedComponent {...this.props} />
-                </React.Fragment>
-            )
-        }
+    // eslint-disable-next-line react/display-name
+    return props => {
+        const [error, clearError] = useHttpErrorHandler(axios)
+        return (
+            <React.Fragment>
+                <Modal
+                    isVisible={error ? true : false}
+                    modalClosed={clearError}>
+                    {error ? error.message : null}
+                </Modal>
+                <WrappedComponent {...props} />
+            </React.Fragment>
+        )
     }
 }
 
