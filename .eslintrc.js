@@ -57,14 +57,6 @@ module.exports = {
                 'singleValue': false
             }
         ],
-        // 'object-curly-spacing': [
-        //     'error',
-        //     'never',
-        //     {
-        //         'objectsInObjects': false,
-        //         'arraysInObjects': false
-        //     }
-        // ],
         'space-before-function-paren': [
             'error',
             'never'
